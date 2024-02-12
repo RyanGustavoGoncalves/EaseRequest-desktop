@@ -1,11 +1,30 @@
-import './assets/main.css'
+import './css/main.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import Register from './pages/auth/register/Register';
 
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <ProtectedRoute element={App} />,
+    // element: <App />,
+    // errorElement: <ErrorPage />,
+  },
+  {
+
+    path: "/auth/register",
+    element: <Register />
+  },
+
+
+]);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>,
 )
