@@ -1,0 +1,348 @@
+/* Color Variables */
+:root {
+    --primary-color: #1fdf64;
+    --background-color: #000;
+    --text-color: white;
+    --secondary-color: #333;
+    --box-shadow-color: #222;
+    --accent-color: red;
+    --focus-color: white;
+}
+
+/* Font Variables */
+:root {
+    --base-font-size: 16px;
+    /* Tamanho base da fonte */
+    --font-size-small: 14px;
+    /* Tamanho da fonte pequena */
+    --font-size-medium: 16px;
+    /* Tamanho da fonte média */
+    --font-size-large: 18px;
+    /* Tamanho da fonte grande */
+    --font-size-extra-large: 24px;
+    /* Tamanho da fonte extra grande */
+}
+
+/* Spacing Variables */
+:root {
+    --padding-small: 8px;
+    /* Espaçamento pequeno */
+    --padding-medium: 16px;
+    /* Espaçamento médio */
+    --padding-large: 24px;
+    /* Espaçamento grande */
+}
+
+/* Border Radius Variables */
+:root {
+    --border-radius-small: 4px;
+    /* Raio da borda pequeno */
+    --border-radius-medium: 8px;
+    /* Raio da borda médio */
+    --border-radius-large: 12px;
+    /* Raio da borda grande */
+}
+
+/* Box Shadow Variables */
+:root {
+    --box-shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Sombra pequena */
+    --box-shadow-medium: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra média */
+    --box-shadow-large: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* Sombra grande */
+}
+
+/* Transition Variables */
+:root {
+    --transition-duration: 0.3s;
+    /* Duração da transição */
+    --transition-easing: ease;
+    /* Suavização da transição */
+}
+
+/* Gap Variables */
+:root {
+    --gap-large: 2rem;
+    /* Espaçamento grande */
+    --gap-medium: .5rem;
+    /* Espaçamento médio */
+    --gap-tiny: 0.2rem;
+    /* Espaçamento mínimo */
+}
+
+/* Inline Size Variables */
+:root {
+    --inline-size-medium: 12rem;
+    /* Tamanho em linha médio */
+}
+
+main.authMain {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+article.authArticle {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+}
+
+.align-welcome-txt {
+    display: grid;
+    place-items: center;
+    border-bottom: solid 1px var(--box-shadow-color);
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.react-typewriter-pointer {
+    background-color: var(--primary-color) !important;
+}
+.react-typewriter-text-wrap h1 {
+    font-weight: normal;
+    color: var(--primary-color);
+    font-size: var(--font-size-extra-large);
+}
+
+.align-welcome-txt span {
+    color: var(--text-color);
+    font-size: (--font-size-small);
+}
+
+
+fieldset.authFieldset {
+    border: none;
+}
+
+div.authField {
+    position: relative;
+    padding: 1rem;
+}
+
+div.authField>legend {
+    color: #1fdf64;
+    font-weight: bold;
+  }
+
+.authField label,
+.authFieldLogin label {
+    font-size: 15px;
+    color: #1fdf64;
+    font-weight: bold;
+    position: absolute;
+    pointer-events: none;
+    transform-origin: 0 0;
+    transition: transform 0.3s ease-out, font-size 0.3s ease-out;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    /* Inverte as cores do ícone (preto para branco, branco para preto) */
+}
+
+input:-webkit-autofill::placeholder {
+    color: #ff0000;
+}
+
+div.authField>input,
+.authFieldLogin>input {
+    inline-size: 12rem;
+    border: none;
+    border-bottom: solid 2px grey;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none;
+    background-color: transparent;
+    color: white;
+}
+
+div.authField>label.active,
+div.authField>input:focus+label,
+div.authField>input:not(:placeholder-shown)+label,
+div.authFieldLogin>label.active,
+/* Adicione a vírgula aqui */
+div.authFieldLogin>input:focus+label,
+/* Adicione a vírgula aqui */
+div.authFieldLogin>input:not(:placeholder-shown)+label {
+    transform: translateY(-100%) scale(0.9);
+    /* Adicionado escala para ajustar o tamanho do rótulo */
+    font-size: 12px;
+    color: #5EC57E;
+}
+
+/* Adicione esta regra para estilizar rótulos quando o mouse passa sobre o input */
+div.authField>input:hover+label,
+div.authFieldLogin>input:hover+label {
+    /* Adicione a vírgula aqui */
+    transform: translateY(-100%) scale(0.9);
+    font-size: 12px;
+    color: #5EC57E;
+}
+
+/* Adicione esta regra para reestilizar rótulos quando o input não estiver vazio e não estiver em foco */
+div.authField>input:not(:focus):not(:placeholder-shown)+label,
+div.authFieldLogin>input:not(:focus):not(:placeholder-shown)+label {
+    /* Adicione a vírgula aqui */
+    transform: translateY(-100%) scale(0.9);
+    font-size: 12px;
+    color: #5EC57E;
+}
+
+.togglePassword {
+    position: absolute;
+    color: white;
+    left: 11.9rem;
+}
+
+.togglePassword img {
+    width: 20px;
+    filter: invert(1);
+}
+
+form.authForm>div.btn {
+    display: grid;
+    place-items: center;
+}
+
+form.authForm>div.btn>button {
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 50px;
+    border: none;
+    inline-size: 200px;
+    background-color: #1fdf64;
+    transition: all 0.5s ease-in-out;
+}
+
+form.authForm>div.btn>button:hover {
+    border: solid 1px white;
+}
+
+form.authForm>div.btn>a>span {
+    font-size: 10px;
+    color: rgba(0, 255, 136, 0.779);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div.modal {
+    position: absolute;
+    z-index: 1000;
+}
+
+div.errorModal {
+    background-color: #000;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 3px 5px 5px #333;
+}
+
+div.errorIcon {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+div.errorMessages {
+    font-weight: bold;
+    color: white;
+    padding: 15px;
+    font-size: var(--font-size-large);
+}
+
+div.modalOpacity {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(2px);
+    z-index: 999;
+}
+
+strong {
+    color: #1fdf64;
+}
+
+strong::after {
+    content: ":";
+}
+
+.authFieldImage {
+    display: grid;
+    place-items: center;
+    color: white;
+}
+
+.imagePreview {
+    display: grid;
+    place-items: center;
+}
+
+.imagePreview img {
+    width: 9rem;
+    height: 9rem;
+    border: dotted 2px grey;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.authFieldImage>span {
+    position: absolute;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.515);
+}
+
+@media (max-width: 765px) {
+
+    main.authMain>div.WelcomeDescWave {
+        display: none;
+    }
+
+    div.logo {
+        position: absolute;
+    }
+
+    section.sectionRegister {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+    }
+
+    fieldset.authFieldset>div.imgFront>img {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 520px) {
+    fieldset.authFieldset>div.imgFront>img {
+        display: none;
+    }
+
+    fieldset.authFieldsetLogin>img {
+        display: none;
+    }
+
+    fieldset.authFieldset {
+        background-color: #80808029;
+        border-radius: 1rem;
+    }
+
+    form.authForm {
+        padding: 1rem;
+    }
+
+    div.authFieldLogin {
+        padding: 0;
+        margin: 3rem 0 3rem 0;
+    }
+
+}
