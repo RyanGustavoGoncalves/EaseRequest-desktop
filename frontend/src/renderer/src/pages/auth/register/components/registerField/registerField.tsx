@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { handleInputBlur, handleInputFocus } from "../../../components/handleInput/HandleInput";
 import Swal from 'sweetalert2';
 
+import iconList from '../../../../../assets/iconList.png';
 import openEye from '../../../assets/openEye.png';
 import closeEye from '../../../assets/closeEye.png';
 import user from '../../../assets/user.png';
@@ -134,110 +135,118 @@ const RegisterField: React.FC = ({ setModalOpacity, setModal, setErrors }) => {
     };
     return (
         <form onSubmit={handleSubmit} className="authForm">
-            <div className="authFieldImage">
-                <span>Select your profile image</span>
-                <div className="imagePreview" onClick={handleImageClick}>
-                    <img src={handleImagePreview() || user} alt="userImage" />
+            <div className="iconList">
+                <img src={iconList} alt="iconList" />
+                <h2>RequestEase</h2>
+            </div>
+            <div className="flex-align">
+                <div className="authFieldImage">
+                    <span>Select your profile image</span>
+                    <div className="imagePreview" onClick={handleImageClick}>
+                        <img src={handleImagePreview() || user} alt="userImage" />
+                    </div>
+                    <input
+                        ref={inputRef}
+                        id="profileImage"
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setProfileImage(e.target.files ? e.target.files[0] : null)}
+                        style={{ display: "none" }}
+                    />
                 </div>
-                <input
-                    ref={inputRef}
-                    id="profileImage"
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setProfileImage(e.target.files ? e.target.files[0] : null)}
-                    style={{ display: "none" }}
-                />
-            </div>
-            <div className="authField">
-                <label id="usernameLabel" className={username ? 'active' : ''} htmlFor="username">
-                    Username
-                </label>
-                <input
-                    id="username"
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    onMouseEnter={() => handleInputFocus('usernameLabel')}
-                    onMouseLeave={() => handleInputBlur('usernameLabel')}
-                />
-            </div>
-            <div className="authField">
-                <label id="firstNameLabel" className={firstName ? 'active' : ''} htmlFor="firstName">
-                    firstName
-                </label>
-                <input
-                    id="firstName"
-                    type="text"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    onMouseEnter={() => handleInputFocus('firstNameLabel')}
-                    onMouseLeave={() => handleInputBlur('firstNameLabel')}
-                />
-            </div>
-            <div className="authField">
-                <label id="lastNameLabel" className={lastName ? 'active' : ''} htmlFor="lastName">
-                    lastName
-                </label>
-                <input
-                    id="lastName"
-                    type="text"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    onMouseEnter={() => handleInputFocus('lastNameLabel')}
-                    onMouseLeave={() => handleInputBlur('lastNameLabel')}
-                />
-            </div>
-            <div className="authField">
-                <label id="emailLabel" className={email ? 'active' : ''} htmlFor="email">
-                    email
-                </label>
-                <input
-                    id="email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    onMouseEnter={() => handleInputFocus('emailLabel')}
-                    onMouseLeave={() => handleInputBlur('emailLabel')}
-                />
-            </div>
-            <div className="authField">
-                <label id="passwordLabel" className={password ? 'active' : ''} htmlFor="password">
-                    password
-                </label>
-                <div className="togglePassword">
-                    <span onClick={handleTogglePassword}>
-                        {showPassword ? <img src={openEye} alt="Open Eye" /> : <img src={closeEye} alt="Closed Eye" />}
-                    </span>
+                <div className="align-fields">
+                    <div className="authField">
+                        <label id="usernameLabel" className={username ? 'active' : ''} htmlFor="username">
+                            Username
+                        </label>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            onMouseEnter={() => handleInputFocus('usernameLabel')}
+                            onMouseLeave={() => handleInputBlur('usernameLabel')}
+                        />
+                    </div>
+                    <div className="authField">
+                        <label id="firstNameLabel" className={firstName ? 'active' : ''} htmlFor="firstName">
+                            firstName
+                        </label>
+                        <input
+                            id="firstName"
+                            type="text"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            onMouseEnter={() => handleInputFocus('firstNameLabel')}
+                            onMouseLeave={() => handleInputBlur('firstNameLabel')}
+                        />
+                    </div>
+                    <div className="authField">
+                        <label id="lastNameLabel" className={lastName ? 'active' : ''} htmlFor="lastName">
+                            lastName
+                        </label>
+                        <input
+                            id="lastName"
+                            type="text"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            onMouseEnter={() => handleInputFocus('lastNameLabel')}
+                            onMouseLeave={() => handleInputBlur('lastNameLabel')}
+                        />
+                    </div>
+                    <div className="authField">
+                        <label id="emailLabel" className={email ? 'active' : ''} htmlFor="email">
+                            email
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            onMouseEnter={() => handleInputFocus('emailLabel')}
+                            onMouseLeave={() => handleInputBlur('emailLabel')}
+                        />
+                    </div>
+                    <div className="authField">
+                        <label id="passwordLabel" className={password ? 'active' : ''} htmlFor="password">
+                            password
+                        </label>
+                        <div className="togglePassword">
+                            <span onClick={handleTogglePassword}>
+                                {showPassword ? <img src={openEye} alt="Open Eye" /> : <img src={closeEye} alt="Closed Eye" />}
+                            </span>
+                        </div>
+                        <input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            onMouseEnter={() => handleInputFocus('passwordLabel')}
+                            onMouseLeave={() => handleInputBlur('passwordLabel')}
+                        />
+                    </div>
+                    <div className="authField">
+                        <label id="confirmPasswordLabel" className={confirmPassword ? 'active' : ''} htmlFor="confirmPassword">
+                            Confirmar senha
+                        </label>
+                        <input
+                            id="confirmPassword"
+                            type={showPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            onMouseEnter={() => handleInputFocus('confirmPasswordLabel')}
+                            onMouseLeave={() => handleInputBlur('confirmPasswordLabel')}
+                        />
+                    </div>
+                    <div className="authField">
+                        <legend>birth</legend>
+                        <input
+                            type="date"
+                            value={birth}
+                            onChange={(e) => setBirth(e.target.value)}
+                        />
+                    </div>
                 </div>
-                <input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onMouseEnter={() => handleInputFocus('passwordLabel')}
-                    onMouseLeave={() => handleInputBlur('passwordLabel')}
-                />
-            </div>
-            <div className="authField">
-                <label id="confirmPasswordLabel" className={confirmPassword ? 'active' : ''} htmlFor="confirmPassword">
-                    Confirmar senha
-                </label>
-                <input
-                    id="confirmPassword"
-                    type={showPassword ? "text" : "password"}
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    onMouseEnter={() => handleInputFocus('confirmPasswordLabel')}
-                    onMouseLeave={() => handleInputBlur('confirmPasswordLabel')}
-                />
-            </div>
-            <div className="authField">
-                <legend>birth</legend>
-                <input
-                    type="date"
-                    value={birth}
-                    onChange={(e) => setBirth(e.target.value)}
-                />
             </div>
             <div className="btn">
                 <button type="submit">Register</button>

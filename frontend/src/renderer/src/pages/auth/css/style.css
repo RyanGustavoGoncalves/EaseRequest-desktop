@@ -83,6 +83,21 @@ main.authMain {
     height: 100%;
 }
 
+.iconList {
+    display: flex;
+    align-items: center;
+}
+
+.iconList h2 {
+    font-weight: normal;
+    font-size: var(--font-size-extra-large);
+    color: var(--primary-color);
+}
+
+.iconList img {
+    width: 50px;
+}
+
 article.authArticle {
     display: grid;
     place-items: center;
@@ -92,34 +107,23 @@ article.authArticle {
     padding: 1rem;
 }
 
-.align-welcome-txt {
-    display: grid;
-    place-items: center;
-    border-bottom: solid 1px var(--box-shadow-color);
-    padding: 0.5rem;
-    width: 100%;
-}
-
-.react-typewriter-pointer {
-    background-color: var(--primary-color) !important;
-}
-.react-typewriter-text-wrap h1 {
-    font-weight: normal;
-    color: var(--primary-color);
-    font-size: var(--font-size-extra-large);
-}
-
-.align-welcome-txt span {
-    color: var(--text-color);
-    font-size: (--font-size-small);
-}
-
-
-fieldset.authFieldset {
+fieldset.authFieldset,
+.authFieldsetLogin {
+    width: 50%;
     border: none;
     background-color: #80808029;
     border-radius: 1rem;
     padding: 1rem;
+}
+
+.authFieldsetLogin {
+    width: 0;
+}
+
+.flex-align {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 div.authField {
@@ -130,7 +134,7 @@ div.authField {
 div.authField>legend {
     color: #1fdf64;
     font-weight: bold;
-  }
+}
 
 .authField label,
 .authFieldLogin label {
@@ -207,12 +211,12 @@ div.authFieldLogin>input:not(:focus):not(:placeholder-shown)+label {
     filter: invert(1);
 }
 
-form.authForm>div.btn {
+div.btn {
     display: grid;
     place-items: center;
 }
 
-form.authForm>div.btn>button {
+div.btn>button {
     cursor: pointer;
     color: black;
     font-weight: bold;
@@ -225,11 +229,12 @@ form.authForm>div.btn>button {
     transition: all 0.5s ease-in-out;
 }
 
-form.authForm>div.btn>button:hover {
+div.btn>button:hover {
     border: solid 1px white;
 }
 
-form.authForm>div.btn>a>span {
+div.btn>a {
+    text-decoration: none;
     font-size: 10px;
     color: rgba(0, 255, 136, 0.779);
     font-weight: bold;
@@ -290,8 +295,8 @@ strong::after {
 }
 
 .imagePreview img {
-    width: 9rem;
-    height: 9rem;
+    width: 15rem;
+    height: 15rem;
     border: dotted 2px grey;
     border-radius: 50%;
     cursor: pointer;
@@ -301,4 +306,18 @@ strong::after {
     position: absolute;
     font-size: 11px;
     color: rgba(255, 255, 255, 0.515);
+}
+
+@media (max-width: 520px) {
+    .flex-align {
+        display: grid;
+    }
+
+    .imagePreview img {
+        width: 10rem;
+        height: 10rem;
+    }
+    .iconList {
+        display: none;
+    }
 }

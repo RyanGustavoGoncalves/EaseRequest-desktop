@@ -20,17 +20,6 @@ const Register: React.FC = () => {
     return (
         <main className='authMain'>
                 <article className="authArticle">
-                    <div className='align-welcome-txt'>
-                        <Typewriter
-                            text="Welcome"
-                            onInit={(typewriter) => {
-                                typewriter
-                                    .pauseFor(2000)
-                                    .start();
-                            }}
-                        />
-                        <span>Make your first register!</span>
-                    </div>
                     <fieldset className="authFieldset">
                         <RegisterField setModalOpacity={setModalOpacity} setModal={setModal} setErrors={setErrors} />
                     </fieldset>

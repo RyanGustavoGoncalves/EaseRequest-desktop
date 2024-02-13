@@ -22,7 +22,7 @@ const Login: React.FC = () => {
     return (
         <section className="sectionRegister">
             <article className="authArticle">
-                <fieldset className="authFieldset">
+                <fieldset className="authFieldsetLogin">
                     <LoginField closeModalOpacity={closeModalOpacity} setModal={setModal} setModalOpacity={setModalOpacity} setErrors={setErrors} />
                 </fieldset>
                 <div className="modal" style={{ display: modal.display }}>
