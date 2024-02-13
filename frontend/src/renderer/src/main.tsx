@@ -6,18 +6,21 @@ import Register from './pages/auth/register/Register';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
+import Login from './pages/auth/login/Login';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <ProtectedRoute element={App} />,
     // element: <App />,
-    // errorElement: <ErrorPage />,
   },
   {
-
     path: "/auth/register",
     element: <Register />
+  },
+  {
+    path: "/auth/login",
+    element: <Login />
   },
 
 
