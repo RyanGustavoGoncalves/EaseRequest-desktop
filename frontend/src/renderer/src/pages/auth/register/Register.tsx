@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import Typewriter from 'react-typewriter-effect';
-import RegisterField from '../components/registerField/registerField';
-import './css/style.css';
 
-import imgError from './assets/icons8-erro-48 (1).png';
+import '../css/style.css';
+import imgError from '../assets/icons8-erro-48 (1).png';
+import RegisterField from './components/registerField/registerField';
 
 const Register: React.FC = () => {
 

@@ -1,12 +1,13 @@
+/* eslint-disable prettier/prettier */
 import { useRef, useState } from "react";
-import { handleInputBlur, handleInputFocus } from "../handleInput/HandleInput";
+import { handleInputBlur, handleInputFocus } from "../../../components/handleInput/HandleInput";
 import Swal from 'sweetalert2';
 
-import openEye from '../../assets/openEye.png';
-import closeEye from '../../assets/closeEye.png';
-import user from '../../assets/user.png';
+import openEye from '../../../assets/openEye.png';
+import closeEye from '../../../assets/closeEye.png';
+import user from '../../../assets/user.png';
+import { Link, useNavigate } from "react-router-dom";
 
-/* eslint-disable prettier/prettier */
 const RegisterField: React.FC = ({ setModalOpacity, setModal, setErrors }) => {
     const [username, setUsername] = useState<string>("");
     const [firstName, setFirstName] = useState<string>("");
@@ -18,6 +19,8 @@ const RegisterField: React.FC = ({ setModalOpacity, setModal, setErrors }) => {
     const [birth, setBirth] = useState<string>("");
     const [role, setRole] = useState<string>("USER");
     const [profileImage, setProfileImage] = useState<File | null>(null);
+
+    const navigate = useNavigate();
 
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
@@ -239,7 +242,9 @@ const RegisterField: React.FC = ({ setModalOpacity, setModal, setErrors }) => {
             <div className="btn">
                 <button type="submit">Register</button>
 
-                <a><span>Already registered? log in!</span></a>
+                <Link to={"/auth/login"}>
+                    <span>Already registered? log in!</span>
+                </Link>
             </div>
         </form>
     )

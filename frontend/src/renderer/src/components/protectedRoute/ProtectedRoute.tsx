@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, RouteProps } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-const ProtectedRoute: React.FC = ({ element: Element, ...rest }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+interface ProtectedRouteProps extends RouteProps {
+  element: JSX.Element;
+}
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element: Element, ...rest }) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const token = localStorage.getItem('token');
 
   useEffect(() => {
     const checkToken = async () => {
-
       if (token) {
         try {
           const response = await fetch('http://localhost:8080/token', {
@@ -29,7 +32,7 @@ const ProtectedRoute: React.FC = ({ element: Element, ...rest }) => {
             Swal.fire({
               icon: 'error',
               title: 'Erro',
-              text: 'Invalid or expired token!',
+              text: 'Token inválido ou expirado!',
             });
           }
         } catch (error) {
@@ -37,7 +40,7 @@ const ProtectedRoute: React.FC = ({ element: Element, ...rest }) => {
           Swal.fire({
             icon: 'error',
             title: 'Erro',
-            text: 'Error fetching token!',
+            text: 'Erro ao buscar o token!',
           });
 
           setIsAuthenticated(false);

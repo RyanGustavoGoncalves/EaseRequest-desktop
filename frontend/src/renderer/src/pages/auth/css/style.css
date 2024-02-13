@@ -117,6 +117,9 @@ article.authArticle {
 
 fieldset.authFieldset {
     border: none;
+    background-color: #80808029;
+    border-radius: 1rem;
+    padding: 1rem;
 }
 
 div.authField {
@@ -298,51 +301,4 @@ strong::after {
     position: absolute;
     font-size: 11px;
     color: rgba(255, 255, 255, 0.515);
-}
-
-@media (max-width: 765px) {
-
-    main.authMain>div.WelcomeDescWave {
-        display: none;
-    }
-
-    div.logo {
-        position: absolute;
-    }
-
-    section.sectionRegister {
-        display: flex;
-        justify-content: center;
-        height: 100%;
-    }
-
-    fieldset.authFieldset>div.imgFront>img {
-        width: 100%;
-    }
-
-}
-
-@media (max-width: 520px) {
-    fieldset.authFieldset>div.imgFront>img {
-        display: none;
-    }
-
-    fieldset.authFieldsetLogin>img {
-        display: none;
-    }
-
-    fieldset.authFieldset {
-        background-color: #80808029;
-        border-radius: 1rem;
-    }
-
-    form.authForm {
-        padding: 1rem;
-    }
-
-    div.authFieldLogin {
-        padding: 0;
-        margin: 3rem 0 3rem 0;
-    }
-
 }
