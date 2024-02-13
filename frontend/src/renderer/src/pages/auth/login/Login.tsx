@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import ScrollReveal from 'scrollreveal';
 import '../css/style.css';
 import imgError from '../assets/icons8-erro-48 (1).png';
 import LoginField from "./components/loginField/loginField";
@@ -18,6 +19,23 @@ const Login: React.FC = () => {
         setModalOpacity({ display: 'none' });
         setModal({ display: 'none' });
     };
+
+    useEffect(() => {
+        const sr = ScrollReveal();
+    
+        const calculateDistance = () => {
+          return window.innerWidth > 768 ? '70px' : '15px';
+        };
+    
+        sr.reveal('.authFieldsetLogin', {
+          origin: 'bottom',
+          duration: 1000,
+          distance: calculateDistance(),
+          reset: true,
+        });
+    
+        
+      }, []);
 
     return (
         <section className="sectionRegister">
