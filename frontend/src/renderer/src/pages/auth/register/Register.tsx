@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from 'react';
-import Typewriter from 'react-typewriter-effect';
-import RegisterField from '../components/registerField/registerField';
-import './css/style.css';
+import React, { useEffect, useState } from 'react';
+import ScrollReveal from 'scrollreveal';
 
-import imgError from './assets/icons8-erro-48 (1).png';
+import '../css/style.css';
+import imgError from '../assets/icons8-erro-48 (1).png';
+import RegisterField from './components/registerField/registerField';
 
 const Register: React.FC = () => {
 
@@ -17,20 +17,25 @@ const Register: React.FC = () => {
         setModal({ display: 'none' });
     };
 
+    useEffect(() => {
+        const sr = ScrollReveal();
+    
+        const calculateDistance = () => {
+          return window.innerWidth > 768 ? '70px' : '15px';
+        };
+    
+        sr.reveal('.authFieldset', {
+          origin: 'bottom',
+          duration: 1000,
+          distance: calculateDistance(),
+          reset: true,
+        });
+        
+      }, []);
+
     return (
         <main className='authMain'>
                 <article className="authArticle">
-                    <div className='align-welcome-txt'>
-                        <Typewriter
-                            text="Welcome"
-                            onInit={(typewriter) => {
-                                typewriter
-                                    .pauseFor(2000)
-                                    .start();
-                            }}
-                        />
-                        <span>Make your first register!</span>
-                    </div>
                     <fieldset className="authFieldset">
                         <RegisterField setModalOpacity={setModalOpacity} setModal={setModal} setErrors={setErrors} />
                     </fieldset>
