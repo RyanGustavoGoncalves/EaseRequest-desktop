@@ -66,7 +66,7 @@ const Home = () => {
         problem: "",
         description: "",
         priority: "",
-        status: "",
+        status: "PENDING",
         creationRequest: "",
         user: [{
             idUsers: "",
@@ -147,6 +147,7 @@ const Home = () => {
             priority: document.getElementById("priority")?.value || "",
             status: document.getElementById("status")?.value || ""
         });
+
         createNewRequest();
         handleAddBox();
     };

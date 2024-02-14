@@ -109,7 +109,7 @@ article.authArticle {
 
 fieldset.authFieldset,
 .authFieldsetLogin {
-    width: 50%;
+    width: 60%;
     border: none;
     background-color: #80808029;
     border-radius: 1rem;
@@ -122,7 +122,7 @@ fieldset.authFieldset,
 
 .flex-align {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 

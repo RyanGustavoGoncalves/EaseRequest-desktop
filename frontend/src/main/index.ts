@@ -1,12 +1,13 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
 import path, { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/iconList.ico?asset'
 
 function createWindow(): void {
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
+    width: 1250,
     height: 700,
     show: false,
     autoHideMenuBar: true,
@@ -18,6 +19,31 @@ function createWindow(): void {
       nodeIntegration: true,
     }
   })
+
+  // Calculate the position of the window in the center of the screen
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width: screenWidth, height: screenHeight } = primaryDisplay.workAreaSize;
+
+  // Calcule a posição da janela no centro da tela
+  const x = Math.round((screenWidth - mainWindow.getSize()[0]) / 2);
+  const y = Math.round((screenHeight - mainWindow.getSize()[1]) / 2);
+
+  // Defina a posição da janela
+  mainWindow.setPosition(x, y);
+
+
+  ipcMain.on('update-is-login-or-register', (event, arg) => {
+    // Atualize a variável isAuthenticated com o valor recebido
+    const isAuthenticated: boolean = arg;
+
+    if (!isAuthenticated) {
+      mainWindow.setResizable(false);
+    } else {
+      mainWindow.setResizable(true);
+      mainWindow.maximize();
+    }
+  });
+
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -50,7 +76,7 @@ app.whenReady().then(() => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
-  
+
 
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
