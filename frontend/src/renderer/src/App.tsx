@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import './css/app.css';
 import { useEffect, useState } from 'react';
+import Home from './pages/home/Home';
 
 
 function App(): JSX.Element {
@@ -32,13 +33,11 @@ function App(): JSX.Element {
     fetchUserRole();
   }, [token]);
 
-return (
-  <>
-    <Link to={"auth/register"}>
-      <h1>HomePage</h1>
-    </Link>
-  </>
-)
+  return (
+    <>
+      <Home />
+    </>
+  )
 }
 
 export default App

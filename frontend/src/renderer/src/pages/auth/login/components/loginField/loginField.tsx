@@ -3,6 +3,7 @@ import openEye from '../../../assets/openEye.png';
 import closeEye from '../../../assets/closeEye.png';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { handleInputBlur, handleInputFocus } from '@renderer/pages/auth/components/handleInput/HandleInput';
 
 interface Error {
   message: string;
@@ -72,30 +73,6 @@ const LoginField: React.FC<Props> = ({ closeModalOpacity, setModal, setModalOpac
             console.error("Erro ao enviar a solicitação:", error);
         }
     };
-
-    const handleInputFocus = (labelId: string) => {
-        const label = document.getElementById(labelId);
-        if (label) {
-            label.classList.add('active');
-        }
-    };
-
-    const handleInputBlur = (labelId: string) => {
-        const label = document.getElementById(labelId);
-        const input = document.getElementById(labelId.replace('Label', '')); // Obtém o input associado ao label
-
-        if (input && input.value.trim() !== '') {
-            if (label) {
-                label.classList.add('active');
-            }
-            return;
-        }
-
-        if (label) {
-            label.classList.remove('active');
-        }
-    };
-
     return (
         <form onSubmit={handleSubmit} className="authForm">
             <div className="authField">
