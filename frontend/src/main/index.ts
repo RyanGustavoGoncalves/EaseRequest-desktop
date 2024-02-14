@@ -1,7 +1,38 @@
-import { app, shell, BrowserWindow, ipcMain, screen } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, screen, Menu } from 'electron'
 import path, { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/iconList.ico?asset'
+
+function createMenu() {
+  const template = [
+    {
+      label: 'New',
+      submenu: [
+        {
+          label: 'New request'
+        },
+      ],
+    },
+    {
+      label: 'Settings',
+      submenu: [
+        {
+          label: "Account",
+        },
+        {
+          label: "Request settings",
+        },
+        {
+          label: "Logout",
+        }
+      ]
+    }
+  ];
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+}
+
 
 function createWindow(): void {
 
@@ -37,8 +68,12 @@ function createWindow(): void {
     const isAuthenticated: boolean = arg;
 
     if (!isAuthenticated) {
+      const menu = Menu.buildFromTemplate([]);
+      Menu.setApplicationMenu(menu);
       mainWindow.setResizable(false);
     } else {
+
+      createMenu();
       mainWindow.setResizable(true);
       mainWindow.maximize();
     }
@@ -81,7 +116,7 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
-  createWindow()
+  createWindow();
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
