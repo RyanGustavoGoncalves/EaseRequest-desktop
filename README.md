@@ -1,1 +1,1 @@
-# requestEase-desktop
+# EaseRequest-desktop
