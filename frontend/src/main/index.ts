@@ -1,10 +1,14 @@
+/* eslint-disable prettier/prettier */
 import { app, shell, BrowserWindow, ipcMain, screen, Menu } from 'electron'
 import path, { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/iconList.ico?asset'
 
-function createMenu() {
-  const template = [
+// Crie a janela globalmente para que possa ser referenciada em qualquer lugar
+let mainWindow: BrowserWindow | null = null;
+
+function createMenu(): void {
+  const template: Electron.MenuItemConstructorOptions[] = [
     {
       label: 'New',
       submenu: [
@@ -24,6 +28,13 @@ function createMenu() {
         },
         {
           label: "Logout",
+          click: (): void => {
+            // Verifique se a janela principal existe
+            if (mainWindow) {
+              // Envie uma mensagem para a janela principal para limpar o localStorage
+              mainWindow.webContents.send('limparLocalStorage');
+            }
+          }
         }
       ]
     }
@@ -35,13 +46,12 @@ function createMenu() {
 
 
 function createWindow(): void {
-
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1250,
     height: 700,
     show: false,
-    autoHideMenuBar: true,
+    autoHideMenuBar: false,
     icon: icon,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -55,16 +65,15 @@ function createWindow(): void {
   const primaryDisplay = screen.getPrimaryDisplay();
   const { width: screenWidth, height: screenHeight } = primaryDisplay.workAreaSize;
 
-  // Calcule a posição da janela no centro da tela
+  // Calculate the position of the window in the center of the screen
   const x = Math.round((screenWidth - mainWindow.getSize()[0]) / 2);
   const y = Math.round((screenHeight - mainWindow.getSize()[1]) / 2);
 
-  // Defina a posição da janela
+  // Define the position of the window
   mainWindow.setPosition(x, y);
 
-
   ipcMain.on('update-is-login-or-register', (event, arg) => {
-    // Atualize a variável isAuthenticated com o valor recebido
+    // Update the isAuthenticated variable with the received value
     const isAuthenticated: boolean = arg;
 
     if (!isAuthenticated) {
@@ -72,13 +81,11 @@ function createWindow(): void {
       Menu.setApplicationMenu(menu);
       mainWindow.setResizable(false);
     } else {
-
       createMenu();
       mainWindow.setResizable(true);
       mainWindow.maximize();
     }
   });
-
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -89,7 +96,6 @@ function createWindow(): void {
     return { action: 'deny' }
   })
 
-  // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
   if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
     mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
@@ -112,7 +118,6 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-
   // IPC test
   ipcMain.on('ping', () => console.log('pong'))
 
@@ -134,5 +139,6 @@ app.on('window-all-closed', () => {
   }
 })
 
-// In this file you can include the rest of your app"s specific main process
+// In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+

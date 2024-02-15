@@ -1,6 +1,8 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
-import { Navigate, RouteProps } from 'react-router-dom';
+import { Navigate, RouteProps, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+
 
 interface ProtectedRouteProps extends RouteProps {
   element: JSX.Element;
@@ -9,6 +11,7 @@ interface ProtectedRouteProps extends RouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element: Element, ...rest }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkToken = async () => {
@@ -58,6 +61,13 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element: Element, ...re
   }
 
   (window as any).electron.ipcRenderer.send('update-is-login-or-register', isAuthenticated);
+
+  (window as any).electron.ipcRenderer.on('limparLocalStorage', () => {
+    localStorage.clear();
+    navigate("/auth/login");
+    (window as any).electron.ipcRenderer.send('update-is-login-or-register', false);
+  }
+  );
 
   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/auth/register" />;
 };
