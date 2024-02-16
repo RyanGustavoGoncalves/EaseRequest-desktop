@@ -1,49 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { app, shell, BrowserWindow, ipcMain, screen, Menu } from 'electron'
-import path, { join } from 'path'
-import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/iconList.ico?asset'
+import { app, shell, BrowserWindow, ipcMain, screen, Menu } from 'electron';
+import path, { join } from 'path';
+import { electronApp, optimizer, is } from '@electron-toolkit/utils';
+import icon from '../../resources/iconList.ico?asset';
 
 // Crie a janela globalmente para que possa ser referenciada em qualquer lugar
 let mainWindow: BrowserWindow | null = null;
 
-function createMenu(): void {
-  const template: Electron.MenuItemConstructorOptions[] = [
-    {
-      label: 'New',
-      submenu: [
-        {
-          label: 'New request'
-        },
-      ],
-    },
-    {
-      label: 'Settings',
-      submenu: [
-        {
-          label: "Account",
-        },
-        {
-          label: "Request settings",
-        },
-        {
-          label: "Logout",
-          click: (): void => {
-            // Verifique se a janela principal existe
-            if (mainWindow) {
-              // Envie uma mensagem para a janela principal para limpar o localStorage
-              mainWindow.webContents.send('limparLocalStorage');
-            }
-          }
-        }
-      ]
-    }
-  ];
-
-  const menu = Menu.buildFromTemplate(template);
-  Menu.setApplicationMenu(menu);
-}
-
+const menu = Menu.buildFromTemplate([]);
+Menu.setApplicationMenu(menu);
 
 function createWindow(): void {
   // Create the browser window.
@@ -77,11 +42,8 @@ function createWindow(): void {
     const isAuthenticated: boolean = arg;
 
     if (!isAuthenticated) {
-      const menu = Menu.buildFromTemplate([]);
-      Menu.setApplicationMenu(menu);
       mainWindow.setResizable(false);
     } else {
-      createMenu();
       mainWindow.setResizable(true);
       mainWindow.maximize();
     }

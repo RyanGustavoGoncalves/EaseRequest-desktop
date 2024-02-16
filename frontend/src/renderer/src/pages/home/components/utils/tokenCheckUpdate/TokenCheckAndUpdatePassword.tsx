@@ -1,8 +1,8 @@
+/* eslint-disable prettier/prettier */
 import Swal from 'sweetalert2';
 
 export const tokenCheckAndUpdatePassword = async (
     tokenMailLabel: any,
-    token: string,
     setModalLabelAndPassword: React.Dispatch<React.SetStateAction<boolean>>,
     setUpdateModal: React.Dispatch<React.SetStateAction<boolean>>
 ): Promise<void> => {
@@ -13,7 +13,6 @@ export const tokenCheckAndUpdatePassword = async (
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(tokenMailLabel),
         });

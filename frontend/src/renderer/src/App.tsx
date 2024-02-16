@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import './css/app.css';
 import { useEffect, useState } from 'react';
 import Home from './pages/home/Home';
+import Navbar from './components/Navbar';
 
 
 function App(): JSX.Element {
@@ -35,7 +36,10 @@ function App(): JSX.Element {
 
   return (
     <>
-      <Home />
+      <main className='appMain'>
+        <Navbar />
+        <Home />
+      </main>
     </>
   )
 }

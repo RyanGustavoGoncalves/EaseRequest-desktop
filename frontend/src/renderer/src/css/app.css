@@ -61,6 +61,130 @@
     --secondary-bg-color: #111 --hover-color: green;
 }
 
+main.appMain {
+    position: absolute;
+    width: 100%;
+    /* height: 100%; */
+    background-color: var(--background-color);
+}
+
+/* === NAVBAR CSS === */
+
+header {
+    display: flex;
+    width: 100%;
+}
+
+nav.navSup {
+    display: grid;
+    background-color: transparent;
+    z-index: 1000;
+    width: 100%;
+    height: 15%;
+    padding: var(--padding-medium);
+}
+
+div.headerLogoName {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-medium);
+}
+
+div.headerLogoName>a {
+    text-decoration: none;
+}
+
+div.headerLogoName>div.userPerfil h1 {
+    font-size: 20px;
+    color: var(--text-color);
+}
+
+div.headerLogoName>div.userPerfil a {
+    display: contents;
+    text-decoration: none;
+}
+
+div.userPerfil>a>img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+div.userPerfil {
+    display: flex;
+    align-items: center;
+    gap: var(--padding-medium);
+}
+
+div.headerLogoName>a>img {
+    width: 50px;
+}
+
+nav.show {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--padding-medium);
+    box-shadow: inset 0 -1px #222;
+    padding: 0.5rem;
+}
+
+nav.show>ul {
+    display: flex;
+    gap: 5rem;
+    justify-content: space-around;
+}
+
+nav.show>ul>li {
+    list-style: none;
+}
+
+div.noActive {
+    cursor: pointer;
+}
+
+nav.show>ul>li a,
+nav.show a,
+.aside-ul-settings-content a {
+    text-decoration: none;
+    color: var(--text-color);
+    position: relative;
+    padding: 0.5rem;
+}
+
+nav.show>ul>li a.noActive::after,
+.aside-ul-settings-content a.noActive::after,
+nav.show a::after,
+nav.show>ul>li a.active::after,
+a.active::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1px;
+    background-color: var(--primary-color);
+    filter: drop-shadow(0px 0px 5px var(--primary-color));
+    left: 0;
+    bottom: 0;
+    transition: width var(--transition-duration) var(--transition-easing);
+}
+
+nav.show>ul>li a.active::after,
+a.active::after {
+    width: 100%;
+}
+
+nav>ul>li a.noActive:hover::after,
+nav.show a.noActive:hover::after,
+.aside-ul-settings-content a.noActive:hover::after {
+    width: 100%;
+}
+
+.menu-icon {
+    display: none;
+}
+
+
+/* === HOME CSS ===*/
+
 h2 {
     color: var(--main-text-color);
 }
@@ -136,8 +260,7 @@ div.addBtn>button {
 }
 
 div.addBtn>button:hover {
-    background-color: #1fdf6538;
-    transform: scale(1.1);
+    background-color: #1fdf65d8;
 }
 
 div.subNav>div.more>img {
@@ -509,4 +632,250 @@ div.page>button:hover {
     div.subNav {
         padding: 0;
     }
+}
+
+
+/* === SETTINGS CSS === */
+
+.main-settings-content {
+    width: 100%;
+}
+
+.section-settings-content h1 {
+    color: var(--primary-color);
+}
+
+.article-settings-content {
+    width: 100%;
+    overflow: auto;
+}
+
+/* === CSS Aside */
+
+.menuConfig {
+    display: flex;
+}
+
+.menuConfig img {
+    cursor: pointer;
+    background-color: var(--box-shadow-color);
+    width: 20px;
+    height: 20px;
+}
+
+.aside-settings-content {
+    max-width: 100%;
+    height: 50vh;
+    border-right: solid 1px var(--box-shadow-color);
+}
+
+.aside-ul-settings-content {
+    display: grid;
+    gap: var(--gap-medium);
+}
+
+.aside-ul-settings-content a {
+    padding: 0;
+}
+
+.aside-ul-settings-content li {
+    padding: 0.5rem;
+}
+
+/* === CSS ProfileSettings === */
+
+.section-settings-content {
+    display: flex;
+    gap: var(--gap-large);
+}
+
+.user-info-image-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.information-user-content {
+    display: grid;
+    max-width: 50%;
+    padding-top: var(--gap-large);
+    gap: var(--gap-medium);
+}
+
+.information-user-content span {
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.information-user-content p {
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.div-user-content {
+    width: 80%;
+}
+
+.userImage {
+    display: grid;
+    place-items: center;
+    padding-right: 5rem;
+    gap: var(--gap-large);
+}
+
+.userImage h2 {
+    font-weight: normal;
+}
+
+div.image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.userImage>div.image>img,
+.user-image-update>div.image>img {
+    width: 30vh;
+    height: 30vh;
+    border-radius: 50%;
+    border: dotted 2px var(--text-color);
+    cursor: pointer;
+}
+
+.user-image-update {
+    padding: 0.5rem;
+    width: 50%;
+}
+
+.btnAlign,
+.btnAlign-profile {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btnAlign-profile {
+    justify-content: space-between;
+}
+
+.password-update-modal {
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.password-update-modal h5 {
+    color: var(--text-color);
+}
+
+.password-update-modal p {
+    font-size: 12px;
+    font-weight: bold;
+    color: rgb(128, 128, 128);
+}
+
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner,
+.spinner-btn {
+    border: 5px solid var(--box-shadow-color);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s ease-in-out infinite;
+}
+
+.spinner-btn {
+    border-top: 5px solid white;
+    width: 20px;
+    height: 20px;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.idProfileSettings p {
+    color: rgba(255, 255, 255, 0.64);
+    font-size: 12px;
+}
+
+@media (max-width: 420px) {
+    .information-user-content>div span {
+        font-size: 16px
+    }
+
+    .information-user-content>div p {
+        font-size: 14px;
+    }
+
+    .userImage>div.image>img,
+    .user-image-update>div.image>img {
+        width: 15vh;
+        height: 15vh;
+    }
+}
+
+/* === CSS RequestSettings */
+
+.excel-file-generator {
+    display: grid;
+    gap: var(--gap-tiny);
+    padding-top: var(--gap-large);
+}
+
+.excel-file-generator>h3 {
+    color: var(--primary-color);
+    font-weight: normal;
+}
+
+.excel-file-generator>span {
+    color: var(--text-color);
+}
+
+
+.downloadBtn>button,
+.desactiveBtn>button {
+    position: relative;
+    padding: var(--padding-small);
+    border-radius: var(--border-radius-small);
+    border: none;
+    background-color: var(--primary-color);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+    inline-size: 10rem;
+}
+
+.desactiveBtn>button {
+    background-color: #1fdf6588;
+}
+
+.downloadBtn>button:hover {
+    background-color: #1fdf65d8;
+}
+
+hr {
+    border: none;
+    border-bottom: solid 1px var(--box-shadow-color);
+    width: 95%;
 }

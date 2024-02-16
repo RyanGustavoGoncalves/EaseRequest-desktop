@@ -11,9 +11,10 @@ interface Error {
 
 const Login: React.FC = () => {
     const [errors, setErrors] = useState<Error[]>([]);
-
     const [modal, setModal] = useState<{ display: string }>({ display: 'none' });
     const [modalOpacity, setModalOpacity] = useState<{ display: string }>({ display: 'none' });
+    
+
 
     const closeModalOpacity = () => {
         setModalOpacity({ display: 'none' });
@@ -22,20 +23,20 @@ const Login: React.FC = () => {
 
     useEffect(() => {
         const sr = ScrollReveal();
-    
+
         const calculateDistance = () => {
-          return window.innerWidth > 768 ? '70px' : '15px';
+            return window.innerWidth > 768 ? '70px' : '15px';
         };
-    
+
         sr.reveal('.authFieldsetLogin', {
-          origin: 'bottom',
-          duration: 1000,
-          distance: calculateDistance(),
-          reset: true,
+            origin: 'bottom',
+            duration: 1000,
+            distance: calculateDistance(),
+            reset: true,
         });
-    
-        
-      }, []);
+
+
+    }, []);
 
     return (
         <section className="sectionRegister">
@@ -62,6 +63,7 @@ const Login: React.FC = () => {
                 {/* Modal de fundo */}
                 <div className="modalOpacity" onClick={closeModalOpacity} style={{ display: modalOpacity.display }}></div>
             </article>
+
         </section>
     );
 };

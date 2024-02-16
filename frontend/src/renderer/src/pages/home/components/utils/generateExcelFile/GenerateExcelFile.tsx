@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import Swal from 'sweetalert2';
 
@@ -7,7 +8,7 @@ interface GenerateExcelFileProps {
     setFileUrl: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const GenerateExcelFile: React.FC<GenerateExcelFileProps> = ({ allUsers, token, setFileUrl }) => {
+export const GenerateExcelFile: React.FC<GenerateExcelFileProps> = async ({ allUsers, token, setFileUrl }) => {
     try {
         const url = allUsers ? 'http://localhost:8080/file/download/all' : 'http://localhost:8080/file/download';
         const response = await fetch(url, {

@@ -62,13 +62,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element: Element, ...re
 
   (window as any).electron.ipcRenderer.send('update-is-login-or-register', isAuthenticated);
 
-  (window as any).electron.ipcRenderer.on('limparLocalStorage', () => {
-    localStorage.clear();
-    navigate("/auth/login");
-    (window as any).electron.ipcRenderer.send('update-is-login-or-register', false);
-  }
-  );
-
   return isAuthenticated ? <Element {...rest} /> : <Navigate to="/auth/register" />;
 };
 

@@ -4,24 +4,48 @@ import closeEye from '../../../assets/closeEye.png';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { handleInputBlur, handleInputFocus } from '@renderer/pages/auth/components/handleInput/HandleInput';
+import Modal from '@renderer/components/Modal';
+import { closeModal } from '@renderer/pages/home/components/utils/ModalFunctions/ModalFunctions';
+import InputField from '@renderer/pages/home/components/inputField/InputField';
+import PasswordUpdateModal from '@renderer/pages/settings/components/profileSettings/components/PasswordUpdateModal ';
+import PasswordUpdateWithNewPasswordModal from '@renderer/pages/settings/components/profileSettings/components/PasswordUpdateWithNewPasswordModal ';
+import { tokenCheckAndUpdatePassword } from '@renderer/pages/home/components/utils/tokenCheckUpdate/TokenCheckAndUpdatePassword';
+import { tokenMailForgotPassword } from '@renderer/pages/home/components/utils/tokenMailForgotPassword/tokenMailForgotPassword';
 
 interface Error {
-  message: string;
+    message: string;
 }
 
 interface Props {
-  closeModalOpacity: () => void;
-  setModal: React.Dispatch<React.SetStateAction<{ display: string }>>;
-  setModalOpacity: React.Dispatch<React.SetStateAction<{ display: string }>>;
-  setErrors: React.Dispatch<React.SetStateAction<Error[]>>;
+    closeModalOpacity: () => void;
+    setModal: React.Dispatch<React.SetStateAction<{ display: string }>>;
+    setModalOpacity: React.Dispatch<React.SetStateAction<{ display: string }>>;
+    setErrors: React.Dispatch<React.SetStateAction<Error[]>>;
+}
+
+interface TokenMailLabel {
+    token: string;
+    newPassword: string;
 }
 
 const LoginField: React.FC<Props> = ({ closeModalOpacity, setModal, setModalOpacity, setErrors }) => {
     const navigate = useNavigate();
 
+    const [usernameEdit, setUsernameEdit] = useState<string>("");
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [showPassword, setShowPassword] = useState<boolean>(false);
+
+    const [showUpdateScreen, setShowUpdateScreen] = useState<boolean>(true);
+    const [updateModal, setUpdateModal] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+    const [modalLabelAndPassword, setModalLabelAndPassword] = useState<boolean>(false);
+    const [tokenMailLabel, setTokenMailLabel] = useState<TokenMailLabel>({
+        token: "",
+        newPassword: ""
+    });
+
 
     const handleTogglePassword = () => {
         setShowPassword(!showPassword);
@@ -73,6 +97,23 @@ const LoginField: React.FC<Props> = ({ closeModalOpacity, setModal, setModalOpac
             console.error("Erro ao enviar a solicitação:", error);
         }
     };
+
+    const handleTokenCheckAndUpdatePassword = async (tokenMailLabel) => {
+        await tokenCheckAndUpdatePassword(tokenMailLabel, setModalLabelAndPassword, setUpdateModal);
+        setModalIsOpen(false);
+        setShowUpdateScreen(false);
+        setUpdateModal(false);
+        setModalLabelAndPassword(false);
+    }
+
+    const sendToken = async (username) => {
+        setLoading(true);
+        await tokenMailForgotPassword(username)
+        setLoading(false);
+        setShowUpdateScreen(false);
+        setUpdateModal(true);
+
+    }
     return (
         <form onSubmit={handleSubmit} className="authForm">
             <div className="authField">
@@ -111,7 +152,60 @@ const LoginField: React.FC<Props> = ({ closeModalOpacity, setModal, setModalOpac
                 <Link to={"/auth/register"}>
                     <span>Don't have registration? register now!</span>
                 </Link>
+                <a onClick={() => setModalIsOpen(true)}>
+                    <span>Forgot password</span>
+                </a>
             </div>
+
+            <Modal isOpen={modalIsOpen} onClose={() => {
+                closeModal(setModalIsOpen)
+                setShowUpdateScreen(true)
+                setUpdateModal(false)
+                setModalLabelAndPassword(false)
+            }}>
+                {loading && (
+                    <div className="loading-container">
+                        <div className="spinner"></div>
+                    </div>
+                )}
+                {showUpdateScreen && (
+
+                    <div className="password-update-modal">
+                        <h5>Update Password</h5>
+                        <p>Enter the username where you want<br /> to receive the token</p>
+
+                        <InputField
+                            id="usernameEdit"
+                            label="Username"
+                            value={usernameEdit}
+                            onChange={(e) => setUsernameEdit(() => (e.target.value))}
+                            onMouseEnter={() => handleInputFocus('usernameEditLabel')}
+                            onMouseLeave={() => handleInputBlur('usernameEditLabel')}
+                        />
+
+                        <div className="btnSave">
+                            <button onClick={() => sendToken({ usernameEdit })}>Send!</button>
+                        </div>
+                    </div>
+                )}
+                {updateModal && (
+                    <PasswordUpdateModal
+                        label="Enter token to update password"
+                        value={tokenMailLabel.token}
+                        onChange={(e) => setTokenMailLabel((prev) => ({ ...prev, token: e.target.value }))}
+                        onClick={() => { setUpdateModal(false), setModalLabelAndPassword(true) }}
+                    />
+                )}
+
+                {modalLabelAndPassword && (
+                    <PasswordUpdateWithNewPasswordModal
+                        label="Enter your new password"
+                        value={tokenMailLabel.newPassword}
+                        onChange={(e) => setTokenMailLabel((prev) => ({ ...prev, newPassword: e.target.value }))}
+                        onClick={() => handleTokenCheckAndUpdatePassword(tokenMailLabel)}
+                    />
+                )}
+            </Modal>
         </form>
     )
 }

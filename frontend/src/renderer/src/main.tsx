@@ -7,12 +7,12 @@ import Register from './pages/auth/register/Register';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import Login from './pages/auth/login/Login';
+import Settings from './pages/settings/settings';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <ProtectedRoute element={App} />,
-    // element: <App />,
   },
   {
     path: "/auth/register",
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     element: <Login />
+  },
+  {
+    path: "/settings",
+    element: <Settings />
   },
 
 
