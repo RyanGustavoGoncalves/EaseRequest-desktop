@@ -1,6 +1,6 @@
 # EaseRequest-desktop 🖥️
 
-# [![My Skills](https://skillicons.dev/icons?i=java,spring,electron,mongo,css,python)](https://skillicons.dev)
+# [![My Skills](https://skillicons.dev/icons?i=java,spring,electron,mongo,css,python,typescript,react)](https://skillicons.dev)
 
 ## Descrição
 
