@@ -1,5 +1,7 @@
 # EaseRequest-desktop 🖥️
 
+# [![My Skills](https://skillicons.dev/icons?i=java,spring,electron,mongo,css,python)](https://skillicons.dev)
+
 ## Descrição
 
 EaseRequest-desktop é uma versão do EaseRequest desenvolvida com Electron, Vite e TypeScript para ambiente desktop. Esta versão utiliza Java e MongoDB para o backend, proporcionando uma experiência de usuário eficiente e segura. A integração com o MongoDB garante armazenamento confiável dos dados, enquanto o uso de tecnologias modernas como Electron e Vite oferece uma interface desktop dinâmica e responsiva.
